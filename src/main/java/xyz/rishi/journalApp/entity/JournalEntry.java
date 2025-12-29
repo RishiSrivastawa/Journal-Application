@@ -1,26 +1,36 @@
 package xyz.rishi.journalApp.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.util.Date;
+
+import java.time.LocalDateTime;
 
 @Document(collection = "journal_entries")
 public class JournalEntry {
+
     @Id
-    private String id;
+    @JsonIgnore
+    private ObjectId id;
+
     private String title;
     private String content;
-    private Date date;
-    public Date getDate() {
-        return date;
+    private LocalDateTime date;
+
+    // 🔑 expose id as String in JSON
+    @JsonProperty("id")
+    public String getIdAsString() {
+        return id != null ? id.toHexString() : null;
     }
-    public void setDate(Date date) {
-        this.date = date;
-    }
-    public String getId() {
+
+    // getters & setters
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
@@ -38,5 +48,13 @@ public class JournalEntry {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 }
