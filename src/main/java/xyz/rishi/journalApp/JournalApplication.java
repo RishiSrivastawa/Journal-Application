@@ -13,6 +13,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JournalApplication {
 
     public static void main(String[] args) {
+        //.run method starts the Spring Boot application.
+        //it bootstraps the app, starting the Spring context and auto-configuring beans.
+//        Client (Postman / Browser)
+//        ↓
+//        Controller  (@RestController)
+//        ↓
+//        Service     (business logic)
+//        ↓
+//        Repository  (MongoDB access)
+//        ↓
+//        MongoDB (journal_entries collection)
+
         SpringApplication.run(JournalApplication.class, args);
     }
 

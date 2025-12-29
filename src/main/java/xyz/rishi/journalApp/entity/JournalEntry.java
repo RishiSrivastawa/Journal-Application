@@ -7,10 +7,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-
+// @Document marks this class as a MongoDB document mapped to the "journal_entries" collection.
 @Document(collection = "journal_entries")
 public class JournalEntry {
-
+    //the annotation @Id marks this field as the primary key in the MongoDB collection.
+    //JsonIgnore will ignore this field during serialization/deserialization.
     @Id
     @JsonIgnore
     private ObjectId id;
@@ -22,6 +23,8 @@ public class JournalEntry {
     // 🔑 expose id as String in JSON
     @JsonProperty("id")
     public String getIdAsString() {
+        // Convert ObjectId to its hexadecimal string representation
+        // This makes it easier to work with IDs in client applications
         return id != null ? id.toHexString() : null;
     }
 
